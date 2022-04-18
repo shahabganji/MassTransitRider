@@ -12,14 +12,15 @@ IHost host = Host.CreateDefaultBuilder(args)
             {
                 configurator.Host(host.Configuration.GetConnectionString("ServiceBus"));
 
+                configurator.Message<OrderCreated>(x=>x.SetEntityName("order-created"));
                 configurator.SubscriptionEndpoint<OrderCreated>("consumer-app",
                     endpointConfigurator => endpointConfigurator.Consumer<OrderCreatedConsumer>(context));
             }));
+            
             mt.AddConsumer<OrderCreatedConsumer>();
             
             mt.AddRider(rider =>
             {
-                rider.AddConsumer<OrderCreatedEventHubConsumer>();
                 rider.UsingEventHub((context, configurator) =>
                 {
                     configurator.Host(host.Configuration.GetConnectionString("EventHub"));
@@ -29,6 +30,8 @@ IHost host = Host.CreateDefaultBuilder(args)
                         endpointConfigurator.ConfigureConsumer<OrderCreatedEventHubConsumer>(context);
                     });
                 });
+                
+                rider.AddConsumer<OrderCreatedEventHubConsumer>();
             });
         });
     })

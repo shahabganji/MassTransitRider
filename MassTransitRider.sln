@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransitRider.Contracts"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransitRider.ServiceBusConsumer", "MassTransitRider.ServiceBusConsumer\MassTransitRider.ServiceBusConsumer.csproj", "{5296CAD2-EB99-4C37-BD72-E67810BA6C1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransitRider.Provisioning", "MassTransitRider.Provisioning\MassTransitRider.Provisioning.csproj", "{4037405B-911E-4D2E-BDE8-A2430935EF8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{5296CAD2-EB99-4C37-BD72-E67810BA6C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5296CAD2-EB99-4C37-BD72-E67810BA6C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5296CAD2-EB99-4C37-BD72-E67810BA6C1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4037405B-911E-4D2E-BDE8-A2430935EF8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4037405B-911E-4D2E-BDE8-A2430935EF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4037405B-911E-4D2E-BDE8-A2430935EF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4037405B-911E-4D2E-BDE8-A2430935EF8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
