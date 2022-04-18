@@ -1,7 +1,17 @@
 using MassTransit;
 using MassTransitRider.ServiceBusConsumer;
+using Serilog;
+using Serilog.Events;
 
-IHost host = Host.CreateDefaultBuilder(args)
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .CreateLogger();
+
+var hostBuilder = Host.CreateDefaultBuilder(args)
     .ConfigureServices((host,services) =>
     {
         services.AddMassTransit(mt =>
@@ -32,7 +42,9 @@ IHost host = Host.CreateDefaultBuilder(args)
                 });
             });
         });
-    })
-    .Build();
+    });
+
+hostBuilder.UseSerilog(Log.Logger);
+var host = hostBuilder.Build();
 
 await host.RunAsync();

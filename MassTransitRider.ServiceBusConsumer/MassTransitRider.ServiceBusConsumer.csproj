@@ -13,6 +13,8 @@
         <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.0.1" />
         <PackageReference Include="MassTransit.EventHub" Version="8.0.1" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
     </ItemGroup>
 
     <ItemGroup>
