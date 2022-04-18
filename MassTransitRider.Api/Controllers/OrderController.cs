@@ -33,7 +33,7 @@ public class OrderController : ControllerBase
             CreatedAt = date
         });
         
-        var producer = await _eventHubProducerProvider.GetProducer(new Uri("topic://evh-consumer"));
+        var producer = await _eventHubProducerProvider.GetProducer(new Uri("topic://evh-riders"));
         await producer.Produce<OrderCreated>(new
         {
             OrderId = orderId, CreatedAt = date
