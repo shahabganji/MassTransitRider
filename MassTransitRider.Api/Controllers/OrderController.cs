@@ -1,6 +1,7 @@
 using MassTransit;
 using MassTransitRider.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using MassTransit.EventHubIntegration;
 
 namespace MassTransitRider.Api.Controllers;
 
@@ -26,7 +27,7 @@ public class OrderController : ControllerBase
     {
         var orderId = Guid.NewGuid();
         var date = DateTimeOffset.UtcNow;
-        //
+        
         // await _publisher.Publish<OrderCreated>(new
         // {
         //     Id = orderId,
@@ -34,7 +35,7 @@ public class OrderController : ControllerBase
         // });
         // _logger.LogInformation("A new order at {Date} is created: {OrderId}", date, orderId);
         
-        var producer = await _eventHubProducerProvider.GetProducer(new Uri("topic:evh-riders"));
+        var producer = await _eventHubProducerProvider.GetProducer("evh-riders");
         await producer.Produce<OrderCreated>(new
         {
             OrderId = orderId, CreatedAt = date

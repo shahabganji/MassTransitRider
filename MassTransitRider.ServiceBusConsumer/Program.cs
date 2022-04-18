@@ -20,7 +20,7 @@ IHost host = Host.CreateDefaultBuilder(args)
             mt.AddRider(rider =>
             {
                 rider.AddConsumer<OrderCreatedEventHubConsumer>();
-                
+
                 rider.UsingEventHub((context, configurator) =>
                 {
                     configurator.Host(host.Configuration.GetConnectionString("EventHub"));
@@ -30,7 +30,6 @@ IHost host = Host.CreateDefaultBuilder(args)
                         endpointConfigurator.ConfigureConsumer<OrderCreatedEventHubConsumer>(context);
                     });
                 });
-                
             });
         });
     })
