@@ -3,18 +3,18 @@ using MassTransitRider.Contracts;
 
 namespace MassTransitRider.ServiceBusConsumer;
 
-public class OrderCreatedConsumer : IConsumer<OrderCreated>
+public class OrderCreatedEventHubConsumer : IConsumer<OrderCreated>
 {
-    private readonly ILogger<OrderCreatedConsumer> _logger;
+    private readonly ILogger<OrderCreatedEventHubConsumer> _logger;
 
-    public OrderCreatedConsumer(ILogger<OrderCreatedConsumer> logger)
+    public OrderCreatedEventHubConsumer(ILogger<OrderCreatedEventHubConsumer> logger)
     {
         _logger = logger;
     }
 
     public Task Consume(ConsumeContext<OrderCreated> context)
     {
-        _logger.LogInformation("Order {OrderId}, Created at {Date}, is consumed at {ConsumeDate}",
+        _logger.LogInformation("EVH - Order {OrderId}, Created at {Date}, is consumed at {ConsumeDate}",
             context.Message.Id, context.Message.CreatedAt, DateTimeOffset.UtcNow);
         
         return Task.CompletedTask;
