@@ -26,20 +26,20 @@ public class OrderController : ControllerBase
     {
         var orderId = Guid.NewGuid();
         var date = DateTimeOffset.UtcNow;
-
-        await _publisher.Publish<OrderCreated>(new
-        {
-            Id = orderId,
-            CreatedAt = date
-        });
+        //
+        // await _publisher.Publish<OrderCreated>(new
+        // {
+        //     Id = orderId,
+        //     CreatedAt = date
+        // });
+        // _logger.LogInformation("A new order at {Date} is created: {OrderId}", date, orderId);
         
         var producer = await _eventHubProducerProvider.GetProducer(new Uri("topic:evh-riders"));
         await producer.Produce<OrderCreated>(new
         {
             OrderId = orderId, CreatedAt = date
         });
-
-        _logger.LogInformation("A new order at {Date} is created: {OrderId}", date, orderId);
+        _logger.LogInformation("A new order at {Date} is PRODUCED: {OrderId}", date, orderId);
 
         return orderId;
     }

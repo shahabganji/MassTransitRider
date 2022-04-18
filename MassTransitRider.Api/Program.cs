@@ -1,5 +1,4 @@
 using MassTransit;
-using MassTransitRider.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +8,8 @@ builder.Services.AddMassTransit(mt =>
     mt.UsingAzureServiceBus((context, configurator) =>
     {
         configurator.Host(builder.Configuration.GetConnectionString("ServiceBus"));
-        configurator.Message<OrderCreated>(x=>x.SetEntityName("order-created"));
+        configurator.ConfigureEndpoints(context);
+        // configurator.Message<OrderCreated>(x=>x.SetEntityName("order-created"));
     });
     
     mt.AddRider(rider =>

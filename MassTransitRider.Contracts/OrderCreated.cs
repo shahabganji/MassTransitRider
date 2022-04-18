@@ -1,4 +1,4 @@
-﻿    namespace MassTransitRider.Contracts;
+﻿namespace MassTransitRider.Contracts;
 
 public interface OrderCreated
 {
