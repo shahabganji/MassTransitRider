@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>dotnet-MassTransitRider.ServiceBusConsumer-20A1D1F7-6C1E-4B45-85EA-816D2041DD80</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+<!--        <PackageReference Include="MassTransit" Version="8.0.1" />-->
+        <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.0.1" />
+        <PackageReference Include="MassTransit.EventHub" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MassTransitRider.Contracts\MassTransitRider.Contracts.csproj" />
+    </ItemGroup>
+</Project>
