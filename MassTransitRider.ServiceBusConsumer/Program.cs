@@ -2,6 +2,7 @@ using MassTransit;
 using MassTransitRider.ServiceBusConsumer;
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()

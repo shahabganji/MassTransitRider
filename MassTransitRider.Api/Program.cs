@@ -1,6 +1,7 @@
 using MassTransit;
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -11,7 +12,7 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Logging.ClearProviders();
 builder.Host.UseSerilog(Log.Logger);
 
 builder.Services.AddControllers();
