@@ -12,6 +12,19 @@ internal class MyStack : Stack
         {
             ResourceGroupName = "rg-mt-riders"
         });
+        
+        _ = new Pulumi.AzureNative.Storage.StorageAccount("st-mt-riders", 
+            new Pulumi.AzureNative.Storage.StorageAccountArgs
+            {
+                Kind = "StorageV2",
+                AccountName = "stmtriders",
+                Sku = new Pulumi.AzureNative.Storage.Inputs.SkuArgs
+                {
+                    Name = "Standard_LRS",
+                },
+                ResourceGroupName = resourceGroup.Name,
+                EnableHttpsTrafficOnly = true,
+            });
 
         _ = new Pulumi.AzureNative.ServiceBus.Namespace("sb-mt-riders",
             new Pulumi.AzureNative.ServiceBus.NamespaceArgs
