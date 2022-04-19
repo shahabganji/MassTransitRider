@@ -30,7 +30,7 @@ builder.Services.AddMassTransit(mt =>
         rider.UsingEventHub((context, configurator) =>
         {
             configurator.Host(builder.Configuration.GetConnectionString("EventHub"));
-            configurator.Storage(builder.Configuration.GetConnectionString("EventHub"));
+            configurator.Storage(builder.Configuration.GetConnectionString("StorageAccount"));
         });
     });
 });

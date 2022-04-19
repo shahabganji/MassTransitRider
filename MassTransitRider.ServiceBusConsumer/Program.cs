@@ -35,7 +35,7 @@ var hostBuilder = Host.CreateDefaultBuilder(args)
                 rider.UsingEventHub((context, configurator) =>
                 {
                     configurator.Host(host.Configuration.GetConnectionString("EventHub"));
-                    configurator.Storage(host.Configuration.GetConnectionString("EventHub"));
+                    configurator.Storage(host.Configuration.GetConnectionString("StorageAccount"));
                     configurator.ReceiveEndpoint("evh-riders", endpointConfigurator =>
                     {
                         endpointConfigurator.ConfigureConsumer<OrderCreatedEventHubConsumer>(context);

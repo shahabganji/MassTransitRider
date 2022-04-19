@@ -23,7 +23,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost(Name = "CreateNewOrder")]
-    public async Task<Guid> Get()
+    public async Task<Guid> Post()
     {
         var orderId = Guid.NewGuid();
         var date = DateTimeOffset.UtcNow;
@@ -38,7 +38,7 @@ public class OrderController : ControllerBase
         var producer = await _eventHubProducerProvider.GetProducer("evh-riders");
         await producer.Produce<OrderCreated>(new
         {
-            OrderId = orderId, CreatedAt = date
+            Id = orderId, CreatedAt = date
         });
         _logger.LogInformation("A new order at {Date} is PRODUCED: {OrderId}", date, orderId);
 
