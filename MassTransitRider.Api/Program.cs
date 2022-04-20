@@ -1,4 +1,5 @@
 using MassTransit;
+using MassTransitRider.Contracts;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
@@ -21,8 +22,8 @@ builder.Services.AddMassTransit(mt =>
     mt.UsingAzureServiceBus((context, configurator) =>
     {
         configurator.Host(builder.Configuration.GetConnectionString("ServiceBus"));
-        configurator.ConfigureEndpoints(context);
-        // configurator.Message<OrderCreated>(x=>x.SetEntityName("order-created"));
+        // configurator.ConfigureEndpoints(context);
+        configurator.Message<OrderCreated>(x=>x.SetEntityName("order-created"));
     });
     
     mt.AddRider(rider =>

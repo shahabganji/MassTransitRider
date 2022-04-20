@@ -27,13 +27,11 @@ public class OrderController : ControllerBase
     {
         var orderId = Guid.NewGuid();
         var date = DateTimeOffset.UtcNow;
-        
-        // await _publisher.Publish<OrderCreated>(new
-        // {
-        //     Id = orderId,
-        //     CreatedAt = date
-        // });
-        // _logger.LogInformation("A new order at {Date} is created: {OrderId}", date, orderId);
+        await _publisher.Publish<OrderCreated>(new
+        {
+            Id = orderId, CreatedAt = date
+        });
+        _logger.LogInformation("A new order at {Date} is created: {OrderId}", date, orderId);
         
         var producer = await _eventHubProducerProvider.GetProducer("evh-riders");
         await producer.Produce<OrderCreated>(new
@@ -41,7 +39,6 @@ public class OrderController : ControllerBase
             Id = orderId, CreatedAt = date
         });
         _logger.LogInformation("A new order at {Date} is PRODUCED: {OrderId}", date, orderId);
-
         return orderId;
     }
 }

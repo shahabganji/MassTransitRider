@@ -1,4 +1,5 @@
 using MassTransit;
+using MassTransitRider.Contracts;
 using MassTransitRider.ServiceBusConsumer;
 using Serilog;
 using Serilog.Events;
@@ -20,13 +21,13 @@ var hostBuilder = Host.CreateDefaultBuilder(args)
             mt.UsingAzureServiceBus(((context, configurator) =>
             {
                 configurator.Host(host.Configuration.GetConnectionString("ServiceBus"));
-                configurator.ConfigureEndpoints(context);
+                // configurator.ConfigureEndpoints(context);
             
-                // configurator.Message<OrderCreated>(x=>x.SetEntityName("order-created"));
-                // configurator.SubscriptionEndpoint<OrderCreated>("consumer-app",
-                //     endpointConfigurator => endpointConfigurator.Consumer<OrderCreatedConsumer>(context));
+                configurator.Message<OrderCreated>(x=>x.SetEntityName("order-created"));
+                configurator.SubscriptionEndpoint<OrderCreated>("consumer-app",
+                    endpointConfigurator => endpointConfigurator.Consumer<OrderCreatedConsumer>(context));
             }));
-            // mt.AddConsumer<OrderCreatedConsumer>();
+            mt.AddConsumer<OrderCreatedConsumer>();
             
             mt.AddRider(rider =>
             {
